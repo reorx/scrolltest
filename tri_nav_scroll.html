@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Smooth Scrolling</title>
+	<style type="text/css">
+		.container{
+			width:300px;
+			margin:0 auto;
+			
+		}
+		.section{
+			margin-top:60px;
+		}
+		.navigation{
+			position: fixed;
+			background:white;
+			padding:20px 20px;
+			width:100%;
+			margin-top:0px;
+			top:0px;
+		}
+
+		a:link,
+		a:hover,
+		a:visited{
+			text-decoration:none;
+			color: #000;
+			padding:3px;
+		}
+
+
+		.active:link,
+		.active:hover,
+		.active:visited
+		{
+			color: #fff;
+			background: #000060;
+		}
+		*{
+			font-family: sans-serif;
+			color: #666;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="navigation">
+		<a href="#html">HTML</a>
+		<a href="#javascript">JavaScript</a>
+		<a href="#jquery">jQuery</a>
+		<a href="#php">PHP</a>
+		<a href="#css">CSS</a>
+	</div>
+	<div class="section">
+		<h1 id="html">HTML</h1>
+		<p>HTML is the lingua franca for publishing hypertext on the World Wide Web. It is a non-proprietary format based upon SGML, and can be created and processed by a wide range of tools, from simple plain text editors - you type it in from scratch - to sophisticated WYSIWYG authoring tools. HTML uses tags such as &lt;h1&gt; and &lt;/h1&gt; to structure text into headings, paragraphs, lists, hypertext links etc. Here is a 10-minute guide for newcomers to HTML. W3C's statement of direction for HTML is given on the HTML Activity Statement. See also the page on our work on, the next generation of Web forms, and the section on Web history.<hover,
+	</div>
+	<div class="section">
+		<h1 id="javascript">JavaScript</h1>
+		<p>The Document Object Model is a platform- and language-neutral interface that will allow programs and scripts to dynamically access and update the content, structure and style of documents. The document can be further processed and the results of that processing can be incorporated back into the presented page. This is an overview of DOM-related materials here at W3C and around the web. "Dynamic HTML" is a term used by some vendors to describe the combination of HTML, style sheets and scripts that allows documents to be animated. The W3C has received several submissions from members companies on the way in which the object model of HTML documents should be exposed to scripts. These submissions do not propose any new HTML tags or style sheet technology. The W3C DOM Activity is working hard to make sure interoperable and scripting-language neutral solutions are agreed upon.</p>
+	</div>
+	<div class="section">
+		<h1 id="jquery">jQuery</h1>
+		<p>jQuery is a new kind of JavaScript Library.
+			jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript.jQuery is a coding language that is a branch from JavaScript. jQuery works like JavaScript where its used to help with interaction and effects with your development code. jQuery hasn’t been around very long, it was release in January 2006 and only on version 1.4.0. jQuery is a new and exciting technology that is catching on quickly and making the internet more interactive and enjoyable.The best featuring for jQuery is the effects you can accomplish, with less code than what it would take with JavaScript. Most common jQuery effects are drop down menus, drag and drop elements, animations and form validation. Developers have also connected this with other coding languages like JSP, ASP, PHP and CGI.</p>
+
+	</div>
+	<div class="section">
+		<h1 id="php">PHP</h1>
+		<p>Instead of lots of commands to output HTML (as seen in C or Perl), PHP pages contain HTML with embedded code that does "something" (in this case, output "Hi, I'm a PHP script!"). The PHP code is enclosed in special start and end processing instructions <?php and ?> that allow you to jump into and out of "PHP mode."
+		What distinguishes PHP from something like client-side JavaScript is that the code is executed on the server, generating HTML which is then sent to the client. The client would receive the results of running that script, but would not know what the underlying code was. You can even configure your web server to process all your HTML files with PHP, and then there's really no way that users can tell what you have up your sleeve.
+		The best things in using PHP are that it is extremely simple for a newcomer, but offers many advanced features for a professional programmer. Don't be afraid reading the long list of PHP's features. You can jump in, in a short time, and start writing simple scripts in a few hours.
+		Although PHP's development is focused on server-side scripting, you can do much more with it. Read on, and see more in the What can PHP do? section, or go right to the introductory tutorial if you are only interested in web programming.
+
+	</p>
+
+	</div>
+	<div class="section">
+		<h1 id="css">CSS</h1>
+		<p>Cascading Style Sheets (CSS) is a style sheet language used to describe the presentation semantics (the look and formatting) of a document written in a markup language. Its most common application is to style web pages written in HTML and XHTML, but the language can also be applied to any kind of XML document, including plain XML, SVG and XUL.
+CSS is designed primarily to enable the separation of document content (written in HTML or a similar markup language) from document presentation, including elements such as the layout, colors, and fonts.[1] This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple pages to share formatting, and reduce complexity and repetition in the structural content (such as by allowing for tableless web design). CSS can also allow the same markup page to be presented in different styles for different rendering methods, such as on-screen, in print, by voice (when read out by a speech-based browser or screen reader) and on Braille-based, tactile devices. While the author of a document typically links that document to a CSS style sheet, readers can use a different style sheet, perhaps one on their own computer, to override the one the author has specified.
+CSS specifies a priority scheme to determine which style rules apply if more than one rule matches against a particular element. In this so-called cascade, priorities or weights are calculated and assigned to rules, so that the results are predictable.</p>
+
+	</div>		
+	</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		//Get Sections top position
+		function getTargetTop(elem){
+			
+			//gets the id of the section header
+			//from the navigation's href e.g. ("#html")
+			var id = elem.attr("href");
+
+			//Height of the navigation
+			var offset = 60;
+
+			//Gets the distance from the top and 
+			//subtracts the height of the nav.
+			return $(id).offset().top - offset;
+		}
+
+		//Smooth scroll when user click link that starts with #
+		$('a[href^="#"]').click(function(event) {
+			
+			//gets the distance from the top of the 
+			//section refenced in the href.
+			var target = getTargetTop($(this));
+
+
+			//scrolls to that section.
+			$('html, body').animate({scrollTop:target}, 500);
+
+			//prevent the browser from jumping down to section.
+			event.preventDefault();
+
+		});
+
+		//Pulling sections from main nav.
+		var sections = $('a[href^="#"]');
+
+		// Go through each section to see if it's at the top.
+		// if it is add an active class
+		function checkSectionSelected(scrolledTo){
+			
+			//How close the top has to be to the section.
+			var threshold = 100;
+
+			var i;
+
+			for (i = 0; i < sections.length; i++) {
+				
+				//get next nav item
+				var section = $(sections[i]);
+
+				//get the distance from top
+				var target = getTargetTop(section);
+				
+				//Check if section is at the top of the page.
+				if (scrolledTo > target - threshold && scrolledTo < target + threshold) {
+
+					//remove all selected elements
+					sections.removeClass("active");
+
+					//add current selected element.
+					section.addClass("active");
+				}
+
+			};
+		}
+
+
+		//Check if page is already scrolled to a section.
+		checkSectionSelected($(window).scrollTop());
+
+		$(window).scroll(function(e){
+			checkSectionSelected($(window).scrollTop())
+		});
+
+
+
+	});
+</script>
+</body>
+</html>
